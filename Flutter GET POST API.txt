@@ -1,0 +1,181 @@
+_____________________________________________________________________________________________________________________________
+
+My Weather API Key: ec3996a8f21683be57dd0ee3f9f3495c || https://home.openweathermap.org/api_keys (website link)
+My News API Key   : 1aaeecdb54c641488a03756e365e502c
+
+Weather api url link: https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=ec3996a8f21683be57dd0ee3f9f3495c
+
+Temporary url links : https://jsonplaceholder.typicode.com/posts
+		      https://api.github.com/users/desi-programmer
+		      https://fakestoreapi.com/
+_______________________________________________________________________________________________________________________________
+
+1. http Methods:
+===================
+
+# print(response.statusCode); // If statusCode is 200 then your API is working properly
+
+	http: ^1.2.0 // dependecies
+	import 'package:http/http.dart' as http;
+
+	a) GET  --> Fetch Users / Display
+	b) POST --> Create user / Add
+	c) PUT  --> Edit User / Update
+	d) DEL  --> Delete User	
+
+
+ a) GET API: (Display Data)
+----------------------------
+			                  || Fetching Single Value ||
+		
+    Future<void> getData() async {
+
+        Response response = await http.get(Uri.parse("https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=ec3996a8f21683be57dd0ee3f9f3495c"));
+       // print(response.statusCode);
+       Map data = jsonDecode(response.body);
+
+        // Map temp_data = data["main"];
+        // double temperature = temp_data["temp"];
+        // print("Temperature is: $temperature");
+
+      List weather_data = data["weather"];
+      Map weather_main_data = weather_data[0];
+      print(weather_main_data["main"]);
+  }
+
+					|| Fetching Multiple Values ||
+
+	Step 1: Create Model class // SampleData
+	Step 2:
+
+	List<SampleData> photosList = [];
+
+  	Future<List<SampleData>> getPhotos() async {
+
+    		final response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
+    		var data = jsonDecode(response.body.toString());
+
+    		if (response.statusCode == 200) {
+      			for (Map i in data) {
+       			   // SampleData sampleData = SampleData(
+                           //     albumId: i['albumId'],
+                           //     id: i['id'],
+                           //     title: i['title'],
+                           //     url: i['url'],
+                           //     thumbnailUrl: i['thumbnailUrl']);
+                           // photosList.add(sampleData);
+
+                           //                OR
+
+        		    data.forEach((i) => photosList.add(SampleData.fromJson(i)));
+                         }
+                 return photosList;
+               } 
+          else {
+                return photosList;
+           }
+        }
+
+	Step 3:
+
+	body: Column(
+          children: [
+            Expanded(
+              child: FutureBuilder(
+                future: getPhotos(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                      itemCount: photosList.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(snapshot.data![index].url.toString()),
+                          ),
+                          title: Text("${photosList[index].id}) ${photosList[index].title}"),
+                        );
+                      });
+                },
+              ),
+            )
+          ],
+        )
+	
+b) POST API: (Add Data)
+------------------------
+
+	           SignUp API: https://reqres.in/api/register
+		_______________________________________________
+	
+		     // Function
+	 void SignUp(String email, password) async {
+           try {
+             var response = await http.post(Uri.parse("https://reqres.in/api/register"),body: {"email": email, "password": password});
+
+          if (response.statusCode == 200) {
+             var data = jsonDecode(response.body.toString());
+             print(data);
+             print("Account created succesfully");
+         }
+        else {
+            print("Failed !!");
+        }
+    } 
+        catch (e) {
+            print(e);
+       }
+    }
+
+		// Function Calll
+	  SignUp(emailController.text.toString(), passwordController.text.toString());
+
+			Upload Image API
+		    ______________________
+
+	import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+	import 'package:image_picker/image_picker.dart';
+	import 'dart:io';
+	import 'package:http/http.dart' as http;
+
+	Step 1. Add permission in android file:
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.CAMERA" />
+
+	Step 2: Add Image picker code 
+	Step 3: Create upload button and call uploadImage() function
+
+	showSpinner = false;
+
+    Future<void> uploadImage() async {
+        setState(() {
+           showSpinner = true;
+        });
+
+   	 var stream = new http.ByteStream(image!.openRead());
+   	 stream.cast();
+
+   	 var length = await image!.length();
+
+   	 var uri = Uri.parse("https://fakestoreapi.com/products/1");
+
+    	 var request = new http.MultipartRequest('POST', uri);
+
+   	 request.fields["title"] = "Static title"; // Add more data here
+
+   	 var multiport = new http.MultipartFile("image", stream, length);
+
+   	 request.files.add(multiport);
+
+   	 var response = await request.send();
+
+    	if (response.statusCode == 200) {
+      		setState(() {
+       		 showSpinner = false;
+      	});
+
+     	   print("Image uploaded");
+    }
+  	else {
+      	    print("Failed");
+        }
+      }

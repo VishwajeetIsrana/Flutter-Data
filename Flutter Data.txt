@@ -1,0 +1,760 @@
+Singlechildscrollview - Singlechildscrollview || physics: BouncingScrollPhysics()
+------------------------
+
+1. Height & width based on Devices - width: MediaQuery.of(context).size.width, || height: MediaQuery.of(context).size.height,
+-------------------------------------
+
+2. Column / Row
+-----------------
+
+   Column(
+      crossAxisAlignment: CrossAxisAlignment.start, 
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+3. Container Style:
+--------------------
+
+        Container(
+              height: 200,
+              width: 200,
+
+              decoration: BoxDecoration(
+                color: Colors.deepOrange,
+
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(21),
+                    bottomRight: Radius.circular(21)),
+
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                ),
+
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 11,
+                    color: Colors.grey,
+                    spreadRadius: 11,
+                  ),
+                ],
+              ),
+            ),
+
+4. Floating Action Button:
+---------------------------
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // Optional
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.amber,
+        ),
+        onPressed: () {},
+        backgroundColor: Colors.brown,
+        mini: false,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          side: BorderSide(width: 2, color: Colors.black),
+        ),
+        elevation: 50,
+        highlightElevation: 50,
+      ),
+ 
+5. Radio Button:
+------------------
+
+	String? gender;
+
+	RadioListTile(
+            activeColor: Colors.red,
+            title: Text("Male"),
+            value: "male",
+            groupValue: gender,
+            onChanged: (value) {
+              setState(() {
+                gender = value.toString();
+              });
+            },
+          ),
+          RadioListTile(
+            activeColor: Colors.red,
+            title: Text("Female"),
+            value: "female",
+            groupValue: gender,
+            onChanged: (value) {
+              setState(() {
+                gender = value.toString();
+              });
+            },
+          ),
+
+6. Checkbox:
+-------------
+	  bool isChecked = false;
+
+	 Checkbox(
+                value: isChecked,
+                onChanged: (bool? newValue) {
+                   setState(() {
+                     isChecked = newValue!;
+                  });
+              }),
+
+7. Toggle Button:
+------------------
+
+	  List<bool> togglevalue = [false, false, false, false];
+
+	 ToggleButtons(
+              selectedColor: Colors.red,
+              children: [
+                Icon(Icons.android),
+                Icon(Icons.apple),
+                Icon(Icons.window_sharp),
+                Icon(Icons.line_axis_outlined),
+              ],
+              isSelected: togglevalue,
+              onPressed: (index) {
+                setState(() {
+                  togglevalue[index] = !togglevalue[index];
+                });
+              },
+            ),	
+
+8. Choice Chip:
+-----------------
+
+ 	 List choice = ["Google", "Facebook", "Twitter", "Amazon"];
+         int choiceIndex = 0;
+
+	  body: Container(
+        child: ListView.builder(
+          itemCount: choice.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ChoiceChip(
+              label: Text(choice[index]),
+              selected: choiceIndex == index,
+              selectedColor: Colors.red.shade200,
+              onSelected: (value) {
+                setState(() {
+                  choiceIndex = value ? index : 0;
+                });
+              },
+              backgroundColor: Colors.green,
+            );
+          },
+        ),
+      ),
+
+9. TextFormField:
+------------------
+
+	       TextFormField(
+              cursorColor: Colors.green,
+
+              decoration: InputDecoration(
+                labelText: "Email",
+                labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+                hintText: "Email",
+                prefixIcon: Icon(Icons.email),
+                suffixIcon: Icon(Icons.remove_red_eye_sharp),
+
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.green, width: 2),
+                ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.green, width: 2),
+                ),
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+
+10. Navigator (Push / Pop):
+-----------------------------
+
+	a) Push -  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => secondPage()),
+              );
+
+	b) Pop - Navigator.of(context).pop();
+
+	c) pushAndRemoveUntil (LOGOUT) -
+		 Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => loginpage()),
+            (Route route) => false);
+
+	d) popUntil - Navigator.of(context).popUntil((route) => route.isFirst);
+
+	e) pushNamedAndRemoveUntil - Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route route) => false);
+
+	
+
+11. CupertinoSwitch: (online/offline switch)
+---------------------------------------------
+	
+	import 'package:flutter/cupertino.dart';
+
+	bool _switchValue = false;
+	  CupertinoSwitch(
+                        value: _switchValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _switchValue = value;
+                          });
+                        })
+
+12. Bottom NavigationBar:
+---------------------------
+
+       int currentIndexValue = 0;
+       List screenList = [
+           homePage(),
+           temp2(),
+           temp3(),
+           temp4(),
+      ];
+
+    body: screenList[currentIndexValue],
+
+    bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: const Color.fromARGB(255, 98, 97, 97),
+        onTap: (index) {
+          setState(() {
+            currentIndexValue = index;
+          });
+        },
+        currentIndex: currentIndexValue,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home",backgroundColor: Color(0xff1F41BB)),
+          BottomNavigationBarItem(icon: Icon(Icons.lock_clock), label: "Notification, backgroundColor: Color(0xff1F41BB)"),
+          BottomNavigationBarItem(icon: Icon(Icons.message), label: "Messages, backgroundColor: Color(0xff1F41BB)"),
+          BottomNavigationBarItem(icon: Icon(Icons.send), label: "Chat, backgroundColor: Color(0xff1F41BB)")
+        ],
+      ),
+
+13. carousel_slider Image:
+---------------------------
+
+  Add in dependencies - import 'package:carousel_slider/carousel_slider.dart';
+
+	  CarouselSlider(
+                  items: [1, 2, 3, 4, 5].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Image.asset("assets/images/meali.jpg"));
+                      },
+                    );
+                  }).toList(),
+                  options: CarouselOptions(
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.8,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    enlargeFactor: 0.3,
+                    // onPageChanged: callbackFunction,
+                    scrollDirection: Axis.horizontal,
+                  )),
+
+14. Gridview:
+--------------
+
+	GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                 crossAxisSpacing: 10,
+                  mainAxisSpacing: 10
+                  ),
+            children: [
+              Image.network(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2V0ObUf9YwERGDfSiSLLdkwkXD91vMUwSBA&usqp=CAU"),
+              Image.network(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2V0ObUf9YwERGDfSiSLLdkwkXD91vMUwSBA&usqp=CAU"),
+              Image.network(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2V0ObUf9YwERGDfSiSLLdkwkXD91vMUwSBA&usqp=CAU"),
+            ],
+          ),
+
+15. GridView Builder:
+----------------------
+
+	  final myimages = [
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2V0ObUf9YwERGDfSiSLLdkwkXD91vMUwSBA&usqp=CAU',
+    'https://i.pinimg.com/originals/9b/a2/57/9ba25796112cad616be27e473ae1e149.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaiQO_Ipf811iQLX1i3LkP51yUJy1uIw8S7w&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2V0ObUf9YwERGDfSiSLLdkwkXD91vMUwSBA&usqp=CAU',
+    'https://i.pinimg.com/originals/9b/a2/57/9ba25796112cad616be27e473ae1e149.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaiQO_Ipf811iQLX1i3LkP51yUJy1uIw8S7w&usqp=CAU'
+  ];
+
+	GridView.builder(
+          padding: EdgeInsets.all(10),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, mainAxisSpacing: 10, crossAxisSpacing: 10),
+          itemCount: myimages.length,
+          itemBuilder: (context, index) {
+            return Image.network(
+              myimages[index],
+              height: 500,
+              width: 500,
+              fit: BoxFit.fill,
+            );
+          }),
+
+16. ListTile:
+--------------
+
+	ListView(
+        children: [
+          ListTile(
+            title: Text("Digvijay Patil"),
+            subtitle: Text("Description"),
+            leading: Icon(Icons.person),
+            trailing: Icon(Icons.star),
+            // contentPadding: EdgeInsets.all(10),
+          ),
+          ListTile(
+            title: Text("Rohit Patil"),
+            subtitle: Text("Description \n Third Line"),
+            isThreeLine: true,
+            leading: Icon(Icons.person),
+            trailing: Icon(Icons.star),
+            // contentPadding: EdgeInsets.all(10),
+            selected: true,
+            selectedColor: Colors.red,
+            onTap: () {},
+            onLongPress: () {},
+            tileColor: Colors.red,
+            // enabled: false,
+          ),
+        ],
+      ),
+
+17. Stack Widget:
+-------------------
+
+	Center(
+          child: Container(
+            child: Stack(
+              // alignment: Alignment.center,
+              // fit: StackFit.passthrough,
+              // textDirection: TextDirection.rtl,
+              clipBehavior: Clip.none, // blue box is outside from main container
+
+              children: [
+                Container(
+                  height: 250,
+                  width: 250,
+                  color: Colors.tealAccent,
+                ),
+                Container(
+                  height: 200,
+                  width: 200,
+                  color: Colors.limeAccent,
+                ),
+                Positioned(
+                  top: -15,
+                  left: -25,
+                  child: Container(
+                    height: 150,
+                    width: 150,
+                    color: Colors.blueAccent,
+                  ),
+                ),
+                // Text(
+                //   "Hello",
+                //   style: TextStyle(
+                //       fontSize: 30,
+                //       color: Colors.white,
+                //       fontWeight: FontWeight.bold),
+                // ),
+              ],
+            ),
+          ),
+        ));
+
+18. Drawer Widget:
+-------------------
+
+	IMP: Custom Drawer -->
+
+	1. add key -- var scaffoldKey = GlobalKey<ScaffoldState>();
+	2. add in scaffold --  key: scaffoldKey,
+	3. Add drawer code
+	4. onTap:(){
+              scaffoldKey.currentState?.openDrawer();
+            },
+       _____________________
+
+	 appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blueAccent),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(150),
+                    child: Image.network(
+                      "https://t4.ftcdn.net/jpg/01/15/85/23/240_F_115852367_E6iIYA8OxHDmRhjw7kOq4uYe4t440f14.jpg",
+                      height: 80,
+                      width: 80,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      "Digvijay Patil",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                ListTile(
+                  title: Text("Home"),
+                  leading: Icon(Icons.home),
+                ),
+                ListTile(
+                  title: Text("Account"),
+                  leading: Icon(Icons.account_box_outlined),
+                ),
+                ListTile(
+                  title: Text("Cart"),
+                  leading: Icon(Icons.shopping_cart),
+                ),
+                ListTile(
+                  title: Text("Logout"),
+                  leading: Icon(Icons.logout),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+
+19. Image Picker:
+------------------
+
+	import 'package:image_picker/image_picker.dart';
+	
+	dynamic file;
+        final ImagePicker _picker = ImagePicker();
+
+  void pickImage() async {
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        file = File(image.path);
+      });
+    }
+  }
+______
+
+       Container(
+                  child: image == null
+                      ? Center(
+                          child: Text("Pick Image",
+                              style: TextStyle(fontSize: 20)),
+                        )
+                      : Container(
+                          child: Center(
+                            child: Image.file(
+                              File(image!.path).absolute,
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                ),
+
+20. Date Picker:
+---------------------
+
+	     ElevatedButton(
+                onPressed: () {
+                  setState(() async {
+
+                    DateTime? datePicked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2024),
+                        lastDate: DateTime(2026),
+			);
+
+                    if (datePicked != null) {
+                      print("Date Selected: ${datePicked.day} - ${datePicked.month} - ${datePicked.year}");
+                    }
+                  });
+                },
+                child: Text(
+                  "Select",
+                  style: TextStyle(fontSize: 25),
+                )),
+
+21. Time Picker:
+-----------------
+
+	     ElevatedButton(
+                onPressed: () {
+                  setState(() async {
+
+                    TimeOfDay? pickedTime = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                        initialEntryMode: TimePickerEntryMode.dial);
+
+                    if (pickedTime != null) {
+                      print("Time Selected: ${pickedTime.hour}: ${pickedTime.minute}");
+                    }
+                  });
+                },
+                child: Text(
+                  "Select",
+                  style: TextStyle(fontSize: 25),
+                )),
+
+22. TabBar Widget:
+------------------
+
+   return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xff01403D),
+          bottom: TabBar(tabs: [
+            Tab(
+              text: "Chats",
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+            ),
+            Tab(
+              text: "Status",
+              icon: Icon(Icons.photo, color: Colors.white),
+            ),
+            Tab(
+              text: "Call",
+              icon: Icon(Icons.call, color: Colors.white),
+            )
+          ]),
+        ),
+        body: TabBarView(children: [
+          Center(child: Text("Chat Screen",)),
+          Center(child: Text("Status Screen")),
+          Center(child: Text("Call Screen")),
+        ]),
+      ),
+    );
+
+23. DropDown List:
+-------------------
+	          String dropdownValue = 'Maharastra';
+
+	           DropdownButton<String>(
+                          value: dropdownValue,
+
+                          items: <String>[
+                            'Maharastra',
+                            'Karnataka',
+                            'Item 3',
+                            'Item 4'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                            });
+                          },
+                        ),
+
+24. File or Document Picker:
+-----------------------------
+
+	import 'package:file_picker/file_picker.dart';
+
+	// Function
+	String fileName = '';
+ 	void _pickFile() async {
+          String? filePath = await FilePicker.platform
+        .pickFiles(
+          type: FileType.any,
+        )
+        .then((result) => result?.files.single.path);
+
+          if (filePath != null) {
+            setState(() {
+            fileName = filePath.split('/').last;
+        });
+      }
+    }
+ _____________
+
+ 	InkWell(	
+            onTap: () {
+               _pickFile();  // Call _pickFile function
+            },
+         child: Container(
+           decoration: BoxDecoration(
+                  color: Color(0xffECF0F3),
+                  borderRadius: BorderRadius.circular(15),
+               ),
+           child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+                    Children: [
+                          Icon(Icons.cloud),
+                          SizedBox(width: 10,),
+                          Text(
+                            "Select Your Resume/CV",
+                             style: TextStyle(fontSize: 20),
+                             textAlign: TextAlign.center,
+                              ),
+                           ],
+                           ),
+                           width: MediaQuery.sizeOf(context).width,
+                             height: 62,
+                      ),
+                    ),
+	          SizedBox(height: 20),
+                  Text(
+                     'Selected File: $fileName',
+                      style: TextStyle(fontSize: 18),
+                  ),
+
+25. Data Passing in Stateful widget:
+-------------------------------------
+
+			|| Main Page ||
+	Step 1: final userName = TextEditingController();
+	Step 2: controller: userName,  // in TextFormField
+	step 3: secondPage(Name: userName.text,) // in OnPressed event
+
+			|| Second Page ||
+	Step 1: var Name;
+                secondPage({super.key, this.Name}); // Declared in upper-top class
+	Step 2:  Text("${widget.Name}",
+
+26. SharedPreferences:
+-----------------------
+
+	import 'package:shared_preferences/shared_preferences.dart';
+	
+	Step 1: final userName = TextEditingController();
+	Step 2: controller: userName,  // in TextFormField
+	Step 3:  @override
+ 		 void initState() {
+    		     super.initState();
+    		     getValue(); // Call getValue() function
+  		}
+	Step 4: setValue();  // Call setValue() function in onTap or onPressed event
+	Step 5: void setValue() async {
+                   var name = userName.toString();
+                   var prefs = await SharedPreferences.getInstance();
+                   prefs.setString("uname", name);
+               }
+
+  	        void getValue() async {
+                  var prefs = await SharedPreferences.getInstance();
+                  var getName = prefs.getString("uname");
+
+                  if (getName != null) {
+                    Navigator.push(context as BuildContext,
+                    MaterialPageRoute(builder: (context) => homePage(),));
+                  } 
+		 else {
+                   loginpage();
+                  }
+              }
+
+27. Snackbar (Showing message):
+--------------------------------
+
+	void showSuccessMessage(String msg) {
+    final snackBar = SnackBar(
+      content: Text(
+        msg,
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.blue,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+28. PopUp Menu Button:
+-----------------------
+	
+	PopupMenuButton(
+                    onSelected: (value){
+
+                    },
+                    color: Colors.white,
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(child: Text("Edit"),
+                        value: "edit",),
+                        PopupMenuItem(child: Text("Delete"),
+                        value: "delete",),
+                      ];
+                    },
+                  ),
+
+29. Bottom Sheet: (Open from bottom)
+
+	 showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: Colors.amber,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('Modal BottomSheet'),
+                ElevatedButton(
+                  child: const Text('Close BottomSheet'),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );

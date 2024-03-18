@@ -1,0 +1,27 @@
+import 'package:get/get.dart';
+
+class localize extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => {
+        'en': {
+          "heading": "Welcome to Flutter Development",
+          "dec": "Please subscribe and like",
+        },
+        'mr': {
+          "heading": "फ्लटर डेव्हलपमेंटमध्ये आपले स्वागत आहे",
+          "dec": "कृपया सबस्क्राईब करा आणि लाईक करा",
+        },
+      };
+}
+
+
+
+
+=============================================================
+
+
+Add in --> main.dart (under GetMterialApp)
+
+	  locale: Locale('en'),
+          fallbackLocale: Locale('en'),
+          translations: localize(),

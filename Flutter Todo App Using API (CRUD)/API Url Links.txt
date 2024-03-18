@@ -1,0 +1,7 @@
+
+- API Main Url: https://api.nstack.in/#/Todo/TodoController_findAll
+
+- GET Api     : https://api.nstack.in/v1/todos?page=1&limit=15
+- POST Api    : https://api.nstack.in/v1/todos
+- PUT Api     : https://api.nstack.in/v1/todos/${id}
+- DELETE Api  : https://api.nstack.in/v1/todos/${id}

@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class ChangeLanguage extends StatefulWidget {
+  const ChangeLanguage({super.key});
+
+  @override
+  State<ChangeLanguage> createState() => _ChangeLanguageState();
+}
+
+class _ChangeLanguageState extends State<ChangeLanguage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Translate Language"),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Container(
+          color: Colors.green,
+          height: 150,
+          width: 400,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+
+                Text(
+                  "heading".tr, // For Translation
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                Text(
+                  "dec".tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+
+                        onPressed: () {
+                          Get.updateLocale(Locale('mr'));
+                        },
+
+                        child: Text("MARATHI")),
+                    ElevatedButton(
+
+                        onPressed: () {
+                          Get.updateLocale(Locale('en'));
+                        },
+
+                        child: Text("ENGLISH")),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

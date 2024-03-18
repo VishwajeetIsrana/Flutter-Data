@@ -1,0 +1,66 @@
+- Basic of flutter:
+-----------------------
+1.create flutter setup
+
+2.create flutter project
+
+3.widgets- Stateless And stateful widget,widget tree
+
+4.scaffold
+
+5.appbar
+
+6.body
+
+7.container
+
+8.create custom container
+
+9.Row and column, how to use alignment for row and column
+
+10.singlechildscrollview - Singlechildscrollview || physics: BouncingScrollPhysics()
+
+10.1 - buttons- floating action button, radio button, checkbox, toggle button, choice chip, \elevated button
+
+11.textfeild,textformfeild
+
+12.inkwell and guesture detection
+
+13.Implement navigation between screens using Navigator- push and pop
+
+14.Listview,Listview Builder,Gridview,Gridview Builder,listtile
+
+15.Stack-set position
+
+16.Expanded and flexible
+
+17.drawer
+
+18.Insert Image
+
+19.Image picker
+
+20.date picker
+
+21. TabView
+
+
+- Advance flutter:
+--------------------
+1.APIs
+
+2.state management using setState and understand its limitations
+
+3.Flutter build apk and aab cmd commands
+
+4.State Management-setState, Provider, getX etc [ Bloc, Redux ]
+
+5.firebase
+
+6.Notifications
+
+7.payment gateway
+
+8.google,fb thourgh login in app
+
+9.Git and GitHub- commands pull,push,clone

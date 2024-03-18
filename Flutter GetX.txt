@@ -1,0 +1,175 @@
+Dependencies: get: ^4.6.6
+import 'package:get/get.dart';
+
+1. Navigate page:
+------------------
+
+	step 1 - Change MaterialApp to --> GetMaterialApp
+	
+		onTap: () {
+                   // Get.to(() => NextPage(),
+                   // transition: Transition.zoom,
+                   // duration: Duration(seconds: 3),
+                   // curve: Curves.bounceIn);
+
+	          Get.to(() => NextPage(), arguments: "this is from first page");
+
+                 },
+
+	       onTap: () {
+                   Get.back();
+                },
+
+		Text(Get.arguments),
+
+2. Change Values:
+-----------------
+
+	Step 1: var count = 0.obs;
+
+	Step 2: Obx(
+              () => Text(
+                "$count",    
+              ),
+            ),
+
+	Step 3: onPressed: () {
+               count++;
+           },
+
+3. Calling Class in GetX:
+----------------------------
+
+	Step 1: Create Class
+
+		class MyController extends GetxController {
+                  var count = 0.obs;
+
+                   incrementCount() {
+                      count++;
+                  }
+              }
+
+	Step 2: Create Object of these class
+
+		 var mycontroller = Get.put(MyController());
+
+	Step 3: Set Values:
+		
+		 Obx(() =>
+		      Text("${mycontroller.count}")
+                    ),
+	
+                 ElevatedButton(
+                    onPressed: () {
+                       mycontroller.incrementCount();
+                     },
+                child: Text("Increment")
+                ),
+
+			  OR
+
+		// We can use both GetX or GetBuilder
+	       GetX<MyController>( // MyController is Class name
+                    init: MyController(),
+                    builder: (obj) => Text("${obj.count}")
+                   ),
+
+               ElevatedButton(
+                    onPressed: () {
+                      var obj1 = Get.find<MyController>();
+                      obj1.incrementCount();
+                   },
+                child: Text("Increment")),
+
+4. Snackbar:
+------------
+
+	void Mysnackbar() {
+
+     Get.snackbar("Keval", "Hello Good Morning",
+        backgroundColor: const Color.fromARGB(255, 65, 64, 64),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        animationDuration: const Duration(seconds: 1),
+        duration: const Duration(seconds: 2),
+        borderRadius: 20,
+        icon: const Icon(
+          Icons.chat,
+          color: Colors.white,
+        ),
+        dismissDirection: DismissDirection.horizontal,
+        isDismissible: false,
+        mainButton: TextButton(
+            onPressed: () {},
+            child: const Text(
+              "Reply",
+              style: TextStyle(color: Colors.white),
+            )),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: const EdgeInsets.all(10));
+  }
+
+5. Dialog Box:
+--------------
+
+	void DialogBox_getX() {
+
+        Get.defaultDialog(
+        // backgroundColor: const Color.fromARGB(255, 65, 64, 64),
+        titleStyle: const TextStyle(color: Colors.black),
+        middleTextStyle: const TextStyle(color: Colors.white),
+        title: "GetX Dialog Box",
+        middleText: "This is best Dialog box in flutter using getX",
+        titlePadding: const EdgeInsets.all(10),
+
+        // actions: [
+        //   TextButton(
+        //       onPressed: () {
+        //         Get.back();
+        // },
+        //       child: Text(
+        //         "Cancle",
+        //         style: TextStyle(color: Colors.red),
+        //       )),
+        //   ElevatedButton(
+        //       onPressed: () {},
+        //       child: Text("Done", style: TextStyle(color: Colors.black)))
+        // ],
+
+        onCancel: () {},
+        onConfirm: () {},
+
+        // You can use middleText or Content
+        content: const Column(
+          children: [Text("data"), TextField()],
+        ),
+        contentPadding: const EdgeInsets.all(10),
+        radius: 20);
+  }
+
+6. bottomSheet:
+---------------
+
+	 void BottomSheet_getX() {
+
+     Get.bottomSheet(Container(
+      decoration: const BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      width: 420,
+      height: 300,
+      child: const Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("This is bottom sheet"),
+          ),
+          Divider(
+            thickness: 3,
+          ),
+        ],
+      ),
+    ));
+  }
