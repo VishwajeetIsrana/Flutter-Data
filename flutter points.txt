@@ -55,12 +55,12 @@
 
 4.State Management-setState, Provider, getX etc [ Bloc, Redux ]
 
-5.firebase
+5.firebase || X
 
-6.Notifications
+6.Notifications || X
 
-7.payment gateway
+7.payment gateway || X
 
-8.google,fb thourgh login in app
+8.google,fb thourgh login in app || X
 
 9.Git and GitHub- commands pull,push,clone

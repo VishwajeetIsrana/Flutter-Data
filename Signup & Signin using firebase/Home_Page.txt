@@ -1,0 +1,42 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:signup_login_page_using_firebase/common/toast.dart';
+import 'package:signup_login_page_using_firebase/signin_activity.dart';
+
+class Home_Activity extends StatefulWidget {
+  const Home_Activity({super.key});
+
+  @override
+  State<Home_Activity> createState() => _Home_ActivityState();
+}
+
+class _Home_ActivityState extends State<Home_Activity> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "HOME",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const SignIn_Activity()));
+
+            showToast(message: "Successfully signed out");
+          },
+          child: const Text("Sign out"),
+        ),
+      ),
+    );
+  }
+}
