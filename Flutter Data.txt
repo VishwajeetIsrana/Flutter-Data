@@ -758,3 +758,25 @@ ______
         );
       },
     );
+
+30. Listview builder:
+
+	ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 25.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(15), // Image border
+                                child: SizedBox.fromSize(
+                                  child: Image.network(
+                                      "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                      height: 60,
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                            );
+                          }),
