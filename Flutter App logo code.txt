@@ -1,0 +1,12 @@
+Step 1: add after --> dev_dependencies:
+                        flutter_test:
+                          sdk: flutter
+
+	                flutter_launcher_icons: "^0.13.1"
+
+                     flutter_launcher_icons:
+                       android: "launcher_icon"
+                       ios: true
+                       image_path: "assets/images/play_store_512.png"
+
+Step 2: Close app and run app with start debugging.
