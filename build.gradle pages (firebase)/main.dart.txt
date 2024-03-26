@@ -1,0 +1,20 @@
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Platform.isAndroid
+      ? await Firebase.initializeApp(
+          options: const FirebaseOptions(
+          apiKey:
+              "AIzaSyAqvX8_3Of9RtpkQjgfW6QdbNsalUihV2Q", // google-services.json
+          appId:
+              "1:578634133752:android:8eab7319ac2a89f7524b0d", // firebase --> project setting --> general
+          messagingSenderId:
+              "578634133752", // firebase --> project setting --> Cloud messaging
+          projectId:
+              "dsp-shop-e70a6", // firebase --> project setting --> general
+          storageBucket: "dsp-shop-e70a6.appspot.com", // google-services.json
+        ))
+      : await Firebase.initializeApp();
+
+  runApp(const MyApp());
+}

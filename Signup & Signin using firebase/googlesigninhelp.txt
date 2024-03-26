@@ -1,0 +1,50 @@
+create project on firebase add all required things in your project 
+now go to Authentication section and enable google signin 
+
+then go to project settings and add sha1 and sha256 key there
+
+command to get Sha1 and sha256
+
+go to android folder 
+./gradlew signingReport
+
+
+
+Required Method
+
+googleLogin() async {
+    print("googleLogin method Called");
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    try {
+      var reslut = await _googleSignIn.signIn();
+      if (reslut == null) {
+        return;
+      }
+      
+      final userData = await reslut.authentication;
+      final credential = GoogleAuthProvider.credential(
+          accessToken: userData.accessToken, idToken: userData.idToken);
+      var finalResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      print("Result $reslut");
+      print(reslut.displayName);
+      print(reslut.email);
+      print(reslut.photoUrl);
+
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> logout() async {
+    await GoogleSignIn().disconnect();
+    FirebaseAuth.instance.signOut();
+  }
+
+
+
+
+Add this in main.dart in main method
+
+ WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();

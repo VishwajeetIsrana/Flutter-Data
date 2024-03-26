@@ -69,7 +69,7 @@ Step 8. Go to the home_screen.dart and start work inside initState() Method
           print(message.notification!.title);
           print(message.notification!.body);
           print("message.data11 ${message.data}");
-          // LocalNotificationService.display(message);
+          // LocalNotificationService.createanddisplaynotification(message);
 
         }
       },
@@ -178,7 +178,7 @@ Step 12 . call initialize method from main method
 
 and uncomment last line from FirebaseMessaging.onMessage method in homescreen
 
---------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
 
 How to send Push Notification Using Postman
 
